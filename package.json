@@ -1,0 +1,32 @@
+{
+  "name": "prismaexpressapi",
+  "version": "1.0.0",
+  "description": "An API developed in node js with Prisma db in Postgresql and Express",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./node_modules/.bin/jest",
+    "linter": "node ./node_modules/eslint/bin/eslint.js .",
+    "linter-fix": "node ./node_modules/eslint/bin/eslint.js . --fix",
+    "server": "node ./lib/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unciafidelis/PrismaExpressAPI.git"
+  },
+  "keywords": [],
+  "author": "Alejandro Morgan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/unciafidelis/PrismaExpressAPI/issues"
+  },
+  "homepage": "https://github.com/unciafidelis/PrismaExpressAPI#readme",
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "express": "^4.18.1",
+    "jest": "^26.0.0",
+    "prisma": "^3.13.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.13.0"
+  }
+}

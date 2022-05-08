@@ -57,3 +57,51 @@ app.delete('/explorers/:id', async (req, res) => {
 	await prisma.explorer.delete({where: {id: id}});
 	return res.json({message: "Eliminado correctamente"});
 });
+
+
+
+
+app.get('/missioncommanders', async (req, res) => {
+  const allMCs =  await prisma.MissionCommander.findMany({});
+  res.json(allMCs);
+});
+
+app.get('/missioncommanders/:id', async (req, res) => {
+  const id = req.params.id;
+  const missioncommander = await prisma.MissionCommander.findUnique({where: {id: parseInt(id)}});
+  res.json(missioncommander);
+});
+
+app.post('/missioncommanders', async (req, res) => {
+  const mc = {
+    name: req.body.name,
+            lang: req.body.lang,
+            missionCommander: req.body.missionCommander,
+            enrollments: req.body.enrollments,
+            hasCertification: req.body.hasCertification
+   };
+  const message = 'Explorer creado.';
+  await prisma.MissionCommander.create({data: mc});
+  return res.json({message});
+});
+
+app.put('/missioncommanders/:id', async (req, res) => {
+const id = parseInt(req.params.id);
+
+await prisma.MissionCommander.update({
+  where: {
+    id: id
+  },
+  data: {
+    lang: req.body.lang
+  }
+})
+
+return res.json({message: "Actualizado correctamente"});
+});
+
+app.delete('/missioncommanders/:id', async (req, res) => {
+const id = parseInt(req.params.id);
+await prisma.MissionCommander.delete({where: {id: id}});
+return res.json({message: "Eliminado correctamente"});
+});

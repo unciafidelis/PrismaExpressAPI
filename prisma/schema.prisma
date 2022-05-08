@@ -25,6 +25,6 @@ model MissionCommander {
   name String @unique
   lang String @db.VarChar(255)
   missionCommander String @db.VarChar(255)
-  enrollments Int @default(0)
+  enrollments Int
   hasCertification  Boolean @default(false)
 }

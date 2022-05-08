@@ -7,6 +7,16 @@ const port = process.env.PORT || 3000;
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+
+// cors
+const cors = require("cors");
+
+const corsOptions = {
+  origin: "http://localhost:8081"
+}
+
+app.use(cors(corsOptions))
+
 app.get('/', (req, res) => {
   res.json({message: 'alive'});
 });
@@ -80,7 +90,7 @@ app.post('/missioncommanders', async (req, res) => {
             enrollments: req.body.enrollments,
             hasCertification: req.body.hasCertification
    };
-  const message = 'Explorer creado.';
+  const message = 'Mission Commander creado.';
   await prisma.MissionCommander.create({data: mc});
   return res.json({message});
 });

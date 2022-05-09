@@ -92,7 +92,54 @@ const prisma = new PrismaClient();
             hasCertification: true
         },
       });
-      console.log('Create 3 Mission Commanders');
+        const MCX = await prisma.missionCommanderX.upsert({
+          where: { name: 'Will' },
+          update: {},
+          create: {
+            name: "Will",
+            username: "Woopanaitor",
+            mainStack: "java",
+            currentEnrollment: true,
+            hasAzureCertification: true 
+          },
+        });
+        const MCX1 = await prisma.missionCommanderX.upsert({
+          where: { name: 'Wall' },
+          update: {},
+          create: {
+            name: "Wall",
+            username: "Woopan",
+            mainStack: "node",
+            currentEnrollment: true,
+            hasAzureCertification: false 
+  
+          },
+        });
+    
+        const MCX2 = await prisma.missionCommanderX.upsert({
+          where: { name: 'Woll' },
+          update: {},
+          create: {
+            name: "Woll",
+            username: "theTwitcher",
+            mainStack: "java",
+            currentEnrollment: true,
+            hasAzureCertification: true 
+          },
+        });
+    
+        const MCX3 = await prisma.missionCommanderX.upsert({
+          where: { name: 'Juan' },
+          update: {},
+          create: {
+            name: "Juan",
+            username: "PerX",
+            mainStack: "node",
+            currentEnrollment: false,
+            hasAzureCertification: false 
+          },
+      });
+      console.log('Create 3 Mission Commanders X');
   } catch(e) {
     console.error(e);
     process.exit(1);

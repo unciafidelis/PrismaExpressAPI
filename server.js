@@ -17,10 +17,11 @@ const corsOptions = {
 
 app.use(cors(corsOptions))
 
+/*
 app.get('/', (req, res) => {
   res.json({message: 'alive'});
 });
-
+*/
 app.listen(port, () => {
   console.log(`Listening to requests on port ${port}`);
 });
@@ -69,7 +70,7 @@ app.delete('/explorers/:id', async (req, res) => {
 });
 
 
-
+//Mission Commanders 
 
 app.get('/missioncommanders', async (req, res) => {
   const allMCs =  await prisma.MissionCommander.findMany({});
@@ -113,5 +114,54 @@ return res.json({message: "Actualizado correctamente"});
 app.delete('/missioncommanders/:id', async (req, res) => {
 const id = parseInt(req.params.id);
 await prisma.MissionCommander.delete({where: {id: id}});
+return res.json({message: "Eliminado correctamente"});
+});
+
+
+
+// missionCommander - Nuevo Feature Fullstack
+
+app.get('/', async (req, res) => {
+  const allMCXs =  await prisma.missionCommanderX.findMany({});
+  res.json(allMCXs);
+});
+
+app.get('/mcx/:id', async (req, res) => {
+  const id = req.params.id;
+  const missioncommanderx = await prisma.missionCommanderX.findUnique({where: {id: parseInt(id)}});
+  res.json(missioncommanderx);
+});
+
+app.post('/mcx', async (req, res) => {
+  const mc = {
+    name: req.body.name,
+    username: req.body.username,
+    mainStack: req.body.mainStack,
+    currentEnrollment: req.body.currentEnrollment,
+    hasAzureCertification: req.body.hasAzureCertification 
+   };
+  const message = 'Mission Commander creado.';
+  await prisma.missionCommanderX.create({data: mc});
+  return res.json({message});
+});
+
+app.put('/mcx/:id', async (req, res) => {
+const id = parseInt(req.params.id);
+
+await prisma.missionCommanderX.update({
+  where: {
+    id: id
+  },
+  data: {
+    mainStack: req.body.mainStack
+  }
+})
+
+return res.json({message: "Actualizado correctamente"});
+});
+
+app.delete('/mcx/:id', async (req, res) => {
+const id = parseInt(req.params.id);
+await prisma.missionCommanderX.delete({where: {id: id}});
 return res.json({message: "Eliminado correctamente"});
 });

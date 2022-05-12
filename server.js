@@ -121,7 +121,7 @@ return res.json({message: "Eliminado correctamente"});
 
 // missionCommander - Nuevo Feature Fullstack
 
-app.get('/', async (req, res) => {
+app.get('/mcx', async (req, res) => {
   const allMCXs =  await prisma.missionCommanderX.findMany({});
   res.json(allMCXs);
 });
@@ -146,18 +146,18 @@ app.post('/mcx', async (req, res) => {
 });
 
 app.put('/mcx/:id', async (req, res) => {
-const id = parseInt(req.params.id);
+	const id = parseInt(req.params.id);
 
-await prisma.missionCommanderX.update({
-  where: {
-    id: id
-  },
-  data: {
-    mainStack: req.body.mainStack
-  }
-})
+	await prisma.missionCommanderX.update({
+		where: {
+			id: id
+		},
+		data: {			
+      mainStack: req.body.mainStack
+		}
+	})
 
-return res.json({message: "Actualizado correctamente"});
+	return res.json({message: "Actualizado correctamente"});
 });
 
 app.delete('/mcx/:id', async (req, res) => {
